@@ -1,3 +1,6 @@
+# Created by https://www.gitignore.io/api/node,visualstudiocode
+
+### Node ###
 # Logs
 logs
 *.log
@@ -72,4 +75,11 @@ typings/
 # Serverless directories
 .serverless
 
-private
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# End of https://www.gitignore.io/api/node,visualstudiocode
