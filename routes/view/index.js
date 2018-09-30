@@ -4,7 +4,9 @@ var router = express.Router();
 var projetos = require('./projetos');
 
 router.get('/', function (req, res, next) {
-    res.render('index');
+    res.render('index', {
+        css: ['projetos']
+    });
 });
 
 router.use('/projetos', projetos);

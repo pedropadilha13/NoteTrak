@@ -1,5 +1,5 @@
 .collapse {
   max-height: 0;
-  transition: max-height 0.2s ease-out;
   overflow: hidden;
+  transition: max-height 0.2s ease-out;
 }

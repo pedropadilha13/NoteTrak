@@ -1,0 +1,4 @@
+.listProjetos .titleProjeto {
+  display: flex;
+  justify-content: space-between;
+}

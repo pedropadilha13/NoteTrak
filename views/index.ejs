@@ -2,35 +2,76 @@
 <body>
     <% include ./shared/navbar.ejs %>
     <section class="section">
-        <div class="columns">
-            <div class="column">
+        <div class="columns is-multiline">
+            <div class="column is-one-third">
                 <div class="content box animated flipInX">
                     <h4>Veja seus projetos antigos</h4>
-                    <ul>
-                        <li>a</li>
-                        <li>a</li>
-                        <li>a</li>
-                        <li>a</li>
-                    </ul>
+                    <div class="listProjetos">
+                        <a class="box">
+                            <p class="titleProjeto">
+                                <span>Track & Trace</span>
+                                <span>Cancelado</span>
+                            </p>
+                            <progress class="progress is-danger" value="100" max="100">100%</progress>
+                        </a>
+                        <a class="box">
+                            <p class="titleProjeto">
+                                <span>Track & Trace</span>
+                                <span>Concluído</span>
+                            </p>
+                            <progress class="progress is-success" value="100" max="100">100%</progress>
+                        </a>
+                        <a class="box">
+                            <p class="titleProjeto">
+                                <span>Track & Trace</span>
+                                <span>Concluído</span>
+                            </p>
+                            <progress class="progress is-success" value="100" max="100">100%</progress>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="column">
+            <div class="column is-one-third">
                 <div class="content box animated jackInTheBox">
                     <h4 class="subtitle">Continue com o que estava fazendo</h4>
+                    <div class="listProjetos">
+                        <a class="box">
+                            <p class="titleProjeto">
+                                <span>Track & Trace</span>
+                                <span>Fase de Entrevistas</span>
+                            </p>
+                            <progress class="progress is-warning" value="30" max="100">30%</progress>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="column">
+            <div class="column is-one-third">
                 <div class="content box animated lightSpeedIn">
                     <h4 class="subtitle">Prepare-se para o que está por vir</h4>
+                    <div class="listProjetos">
+                        <a class="box">
+                            <p class="titleProjeto">
+                                <span>Track & Trace</span>
+                                <span>Em Análise</span>
+                            </p>
+                            <progress class="progress is-warning" value="0" max="100">0%</progress>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="columns">
             <div class="column">
-                <div class="content box animated zoomInUp"></div>
-            </div>
-            <div class="column">
-                <div class="content box animated bounceInUp"></div>
+                <div class="content box animated bounceInUp">
+                    <h4 class="subtitle">Configure os seus templates</h4>
+                    <p>Você pode configurar os seus formulários para facilitar ou aumentar a especificidade das suas análises! Adicione ou remova perguntas e modifique as categorias como quiser, ou adicione novos parâmetros para especificar melhor as dimensões do seu projeto.</p>
+                    <div class="columns">
+                        <div class="column">
+                            <a class="button is-medium is-fullwidth is-link">Formulário de Perguntas</a>
+                        </div>
+                        <div class="column">
+                            <a class="button is-medium is-fullwidth is-link">Dimensões do Projeto</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
