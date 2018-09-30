@@ -1,13 +1,39 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hello, World!</title>
-</head>
+<% include ./shared/header.ejs %>
 <body>
-    <h1>Hello, World!</h1>
-    <script src="/scripts/index.js"></script>
+    <% include ./shared/navbar.ejs %>
+    <section class="section">
+        <div class="columns">
+            <div class="column">
+                <div class="content box animated flipInX">
+                    <h4>Veja seus projetos antigos</h4>
+                    <ul>
+                        <li>a</li>
+                        <li>a</li>
+                        <li>a</li>
+                        <li>a</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="content box animated jackInTheBox">
+                    <h4 class="subtitle">Continue com o que estava fazendo</h4>
+                </div>
+            </div>
+            <div class="column">
+                <div class="content box animated lightSpeedIn">
+                    <h4 class="subtitle">Prepare-se para o que está por vir</h4>
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column">
+                <div class="content box animated zoomInUp"></div>
+            </div>
+            <div class="column">
+                <div class="content box animated bounceInUp"></div>
+            </div>
+        </div>
+    </section>
+    <% include ./shared/footer.ejs %>
 </body>
 </html>
