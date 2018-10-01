@@ -2,9 +2,36 @@
 <body>
     <% include ./shared/navbar.ejs %>
     <section class="section">
-        <div class="container">
-            <h1 class="title">Teste</h1>
-            <h2 class="subtitle">Subtitle</h2>
+        <div class="columns">
+            <div class="column">
+                <form data-id="pesquisarProjetos" class="animated flipInX">
+                    <div class="field is-grouped">
+                        <div class="control is-expanded">
+                            <input class="input is-rounded" type="text" name="pesquisar" placeholder="Pesquisar por projetos...">
+                        </div>
+                        <div class="control">
+                            <button type="submit" class="button is-link is-rounded">Go</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column">
+                <div class="content box animated bounceIn">
+                    <h4 class="subtitle">Filtros de Busca</h4>
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column">
+                <div class="content box animated bounceInUp">
+                    <h4 class="subtitle">Resultados da Busca</h4>
+                    <div class="listProjetos collapse" data-collapsed="false" data-id="resultadoPesquisaProjetos">
+                        <p>O resultado da sua busca vai ser exibido aqui</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <% include ./shared/footer.ejs %>

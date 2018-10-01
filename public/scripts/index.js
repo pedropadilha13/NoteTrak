@@ -1,6 +1,47 @@
 (function (window, document) {
     'use strict';
 
+    function Dropdown($element) {
+        var wasClicked = false;
+
+        $element.addEventListener('mouseover', handleDropdownMouseover);
+        $element.addEventListener('mouseout', handleDropdownMouseout);
+        $element.addEventListener('click', handleDropdownClick);
+
+        function handleDropdownMouseout() {
+            if ($element.classList.contains('is-active')) {
+                $element.classList.remove('is-active');
+            }
+        }
+
+        function handleDropdownMouseover() {
+            if (!$element.classList.contains('is-active')) {
+                $element.classList.add('is-active');
+            }
+        }
+
+        function handleDropdownClick() {
+            document.addEventListener('click', handleClickAnywhere, true);
+            if (!wasClicked) {
+                wasClicked = true;
+                $element.removeEventListener('mouseout', handleDropdownMouseout);
+                handleDropdownMouseover();
+            }
+        }
+
+        function handleClickAnywhere(ev) {
+            document.removeEventListener('click', handleClickAnywhere);
+            if (wasClicked) {
+                wasClicked = false;
+                $element.addEventListener('mouseout', handleDropdownMouseout);
+                handleDropdownMouseout();
+                ev.stopPropagation();
+            }
+        }
+
+        return $element;
+    }
+
     function isFunction(param) {
         return Object.prototype.toString.call(param) === '[object Function]';
     }
@@ -50,14 +91,43 @@
         this.xhr.send(JSON.stringify(this.body));
     };
 
-    Element.prototype.collapse = function collapse() {
-        if (this.style.maxHeight) {
-            this.style.maxHeight = null;
-        } else {
-            this.style.maxHeight = this.scrollHeight + 'px';
+    Element.prototype.collapse = function collapse(display = 'toggle') {
+        var $element = this;
+
+        function collapseShow() {
+            $element.style.maxHeight = $element.scrollHeight + 'px';
+            $element.style.overflow = 'unset';
         }
+
+        function collapseHide() {
+            $element.style.maxHeight = null;
+            $element.style.overflow = 'hidden';
+        }
+
+        switch (display) {
+            case 'toggle':
+                $element.style.maxHeight ? collapseHide() : collapseShow();
+                break;
+            case 'hide':
+                collapseHide();
+                break;
+            case 'show':
+                collapseShow();
+                break;
+        }
+
+        return $element;
     };
+
+    document.querySelectorAll('[data-collapsed="false"]').forEach(function ($element) {
+        $element.collapse('show');
+    });
+
+    document.querySelectorAll('.has-dropdown').forEach(function ($element) {
+        Dropdown($element);
+    });
 
     window.Ajax = Ajax;
     window.isFunction = isFunction;
+    window.NoteTrakModules = {};
 })(window, document);

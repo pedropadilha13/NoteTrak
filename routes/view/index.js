@@ -5,6 +5,7 @@ var projetos = require('./projetos');
 
 router.get('/', function (req, res, next) {
     res.render('index', {
+        tab: 0,
         css: ['projetos']
     });
 });
