@@ -6,3 +6,16 @@
 .listProjetos .titleProjeto *:last-child {
   text-align: right;
 }
+
+.listProjetos .boxProjetos {
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  cursor: pointer;
+  padding: 16px;
+  margin-bottom: 15px;
+}
+
+.listProjetos .boxProjetos:hover {
+  border-color: #3273dc;
+  cursor: pointer;
+}

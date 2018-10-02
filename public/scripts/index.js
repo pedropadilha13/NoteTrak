@@ -1,51 +1,6 @@
 (function (window, document) {
     'use strict';
 
-    function Dropdown($element) {
-        var wasClicked = false;
-
-        $element.addEventListener('mouseover', handleDropdownMouseover);
-        $element.addEventListener('mouseout', handleDropdownMouseout);
-        $element.addEventListener('click', handleDropdownClick);
-
-        function handleDropdownMouseout() {
-            if ($element.classList.contains('is-active')) {
-                $element.classList.remove('is-active');
-            }
-        }
-
-        function handleDropdownMouseover() {
-            if (!$element.classList.contains('is-active')) {
-                $element.classList.add('is-active');
-            }
-        }
-
-        function handleDropdownClick() {
-            document.addEventListener('click', handleClickAnywhere, true);
-            if (!wasClicked) {
-                wasClicked = true;
-                $element.removeEventListener('mouseout', handleDropdownMouseout);
-                handleDropdownMouseover();
-            }
-        }
-
-        function handleClickAnywhere(ev) {
-            document.removeEventListener('click', handleClickAnywhere);
-            if (wasClicked) {
-                wasClicked = false;
-                $element.addEventListener('mouseout', handleDropdownMouseout);
-                handleDropdownMouseout();
-                ev.stopPropagation();
-            }
-        }
-
-        return $element;
-    }
-
-    function isFunction(param) {
-        return Object.prototype.toString.call(param) === '[object Function]';
-    }
-
     function Ajax(ajaxUrl, body = {}, method = 'GET', headers = { 'Content-Type': 'application/json' }) {
         if (!(this instanceof Ajax)) {
             return new Ajax(ajaxUrl, body, method, headers);
@@ -91,17 +46,82 @@
         this.xhr.send(JSON.stringify(this.body));
     };
 
+    function Dropdown($element) {
+        var wasClicked = false;
+
+        $element.addEventListener('mouseover', handleDropdownMouseover);
+        $element.addEventListener('mouseout', handleDropdownMouseout);
+        $element.addEventListener('click', handleDropdownClick);
+
+        function handleDropdownMouseout() {
+            if ($element.classList.contains('is-active')) {
+                $element.classList.remove('is-active');
+            }
+        }
+
+        function handleDropdownMouseover() {
+            if (!$element.classList.contains('is-active')) {
+                $element.classList.add('is-active');
+            }
+        }
+
+        function handleDropdownClick() {
+            document.addEventListener('click', handleClickAnywhere, true);
+            if (!wasClicked) {
+                wasClicked = true;
+                $element.removeEventListener('mouseout', handleDropdownMouseout);
+                handleDropdownMouseover();
+            }
+        }
+
+        function handleClickAnywhere(ev) {
+            document.removeEventListener('click', handleClickAnywhere);
+            if (wasClicked) {
+                wasClicked = false;
+                $element.addEventListener('mouseout', handleDropdownMouseout);
+                handleDropdownMouseout();
+                ev.stopPropagation();
+            }
+        }
+
+        return $element;
+    }
+
+    function getProgressBar(progress = 0, status = 1) {
+        var $progress = document.createElement('progress');
+        var color = status === 0 ? 'is-danger' : progress === 100 ? 'is-success' : 'is-warning';
+        $progress.max = 100;
+        $progress.value = progress;
+        $progress.innerText = progress + '%';
+        $progress.classList.add('progress');
+        $progress.classList.add(color);
+        return $progress;
+    }
+
+    function isFunction(param) {
+        return Object.prototype.toString.call(param) === '[object Function]';
+    }
+
+    function setSpinner($element) {
+        $element.empty().innerHTML = '<div class="has-text-centered"><i class="fas fa-circle-notch fa-spin fa-lg"></i></div>';
+    }
+
+    Element.prototype.empty = function empty() {
+        while (this.firstChild) {
+            this.removeChild(this.firstChild);
+        }
+        return this;
+    }
+
     Element.prototype.collapse = function collapse(display = 'toggle') {
         var $element = this;
 
         function collapseShow() {
             $element.style.maxHeight = $element.scrollHeight + 'px';
-            $element.style.overflow = 'unset';
         }
 
         function collapseHide() {
             $element.style.maxHeight = null;
-            $element.style.overflow = 'hidden';
         }
 
         switch (display) {
@@ -119,15 +139,19 @@
         return $element;
     };
 
-    document.querySelectorAll('[data-collapsed="false"]').forEach(function ($element) {
+    var $dataCollapsedElements = document.querySelectorAll('[data-collapsed="false"]') || [];
+    $dataCollapsedElements.forEach(function ($element) {
         $element.collapse('show');
     });
 
-    document.querySelectorAll('.has-dropdown').forEach(function ($element) {
+    var $hasDropdownElements = document.querySelectorAll('.has-dropdown') || [];
+    $hasDropdownElements.forEach(function ($element) {
         Dropdown($element);
     });
 
     window.Ajax = Ajax;
+    window.getProgressBar = getProgressBar;
     window.isFunction = isFunction;
+    window.setSpinner = setSpinner;
     window.NoteTrakModules = {};
 })(window, document);
