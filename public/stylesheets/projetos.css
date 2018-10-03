@@ -19,3 +19,12 @@
   border-color: #3273dc;
   cursor: pointer;
 }
+
+.listDimensoesCategorias p {
+  display: flex;
+  justify-content: space-between;
+}
+
+.listDimensoesCategorias p:hover {
+  background-color: #cecece;
+}
