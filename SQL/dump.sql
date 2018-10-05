@@ -30,7 +30,7 @@ CREATE TABLE ProjetosPerguntas(
     projetoperguntaid INT IDENTITY PRIMARY KEY,
     perguntaid INT REFERENCES Perguntas(perguntaid),
     projetoid INT REFERENCES Projetos(projetoid),
-    resposta TINYINT(1)
+    resposta TINYINT
 );
 
 CREATE TABLE DimensoesCategorias(
@@ -57,7 +57,7 @@ CREATE TABLE ProjetosDimensoes(
     projetodimensaoid INT IDENTITY PRIMARY KEY,
     dimensaoid INT REFERENCES Dimensoes(dimensaoid),
     projetoid INT REFERENCES Projetos(projetoid),
-    nivel TINYINT(1),
+    nivel TINYINT,
     ordem INT
 );
 
@@ -65,5 +65,5 @@ CREATE TABLE ProjetosDimensoesValores(
     templateid INT IDENTITY PRIMARY KEY,
     projetoid INT REFERENCES Projetos(projetoid),
     dimensaoid INT REFERENCES Dimensoes(dimensaoid),
-    nivel TINYNT(1)
+    nivel TINYNT
 );
