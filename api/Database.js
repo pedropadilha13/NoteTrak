@@ -13,9 +13,9 @@ function Database() {
     function getInstance() {
         if (!instance) {
             instance = new Sequelize({
-                database: '',
-                username: '',
-                password: '',
+                database: 'notetrak',
+                username: 'pedropadilha13',
+                password: 'N0737R4Klalala',
                 dialect: 'mssql',
                 pool: {
                     max: 5,
