@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 function Database() {
-    const instance = null;
+    let instance = null;
 
     function closeInstance() {
         if (instance) {
@@ -13,10 +13,15 @@ function Database() {
     function getInstance() {
         if (!instance) {
             instance = new Sequelize({
-                database: 'notetrak',
-                username: 'pedropadilha13',
+                host: 'projetoagenda.database.windows.net',
+                port: 1433,
+                database: 'agenda',
+                username: 'Anonimy',
                 password: 'N0737R4Klalala',
                 dialect: 'mssql',
+                dialectOptions: {
+                    encrypt: true,
+                },
                 pool: {
                     max: 5,
                     min: 0,
