@@ -1,18 +1,6 @@
 /** 
  * ARQUIVO GERADO PARA CRIACAO DAS
  * TABELAS UTILIZANDO O SEQUELIZE.
- * 
- *  ________________________
- * |                        |
- * |   !!!  CUIDADO  !!!    |
- * |                        |
- * | Este arquivo dropa as  |
- * | tabelas para recria-las|
- * | depois. NUNCA EXECUTE  |
- * | SEM ABSOLUTA CERTEZA   |
- * | DO QUE ESTA FAZENDO.   |
- * |________________________|
- * 
  */
 
 const path = require('path');
@@ -32,18 +20,18 @@ const Dimensoes = sequelize.import(path.join(...basePath, 'Dimensoes.js'));
 const ProjetosDimensoes = sequelize.import(path.join(...basePath, 'ProjetosDimensoes.js'));
 const ProjetosTemplates = sequelize.import(path.join(...basePath, 'ProjetosTemplates.js'));
 
-StatusProjetos.sync({ force: true })
-    .then(() => Projetos.sync({ force: true }))
-    .then(() => PerguntasCategorias.sync({ force: true }))
-    .then(() => Perguntas.sync({ force: true }))
-    .then(() => ProjetosPerguntas.sync({ force: true }))
-    .then(() => DimensoesCategorias.sync({ force: true }))
-    .then(() => DimensoesSubcategorias.sync({ force: true }))
-    .then(() => Dimensoes.sync({ force: true }))
-    .then(() => ProjetosDimensoes.sync({ force: true }))
-    .then(() => ProjetosTemplates.sync({ force: true }))
+StatusProjetos.sync()
+    .then(() => Projetos.sync())
+    .then(() => PerguntasCategorias.sync())
+    .then(() => Perguntas.sync())
+    .then(() => ProjetosPerguntas.sync())
+    .then(() => DimensoesCategorias.sync())
+    .then(() => DimensoesSubcategorias.sync())
+    .then(() => Dimensoes.sync())
+    .then(() => ProjetosDimensoes.sync())
+    .then(() => ProjetosTemplates.sync())
     .then(() => {
-        console.log('Tabelas criadas com sucesso!');
         Database.closeInstance();
+        console.log('\n\nTODAS AS TABELAS FORAM CRIADAS COM SUCESSO!\n\n');
     })
     .catch(error => console.log(error));

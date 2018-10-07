@@ -2,20 +2,20 @@ const path = require('path');
 const Database = require('../Database');
 
 const sequelize = Database.getInstance();
-const PerguntasCategorias = sequelize.import(path.join(__dirname, 'PerguntasCategorias.js'));
+const DimensoesCategorias = sequelize.import(path.join(__dirname, 'DimensoesCategorias.js'));
 
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('Perguntas', {
-        perguntaid: {
+    return sequelize.define('DimensoesSubcategorias', {
+        dimensaosubcategoriaid: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        perguntacategoriaid: {
+        dimensaocategoriaid: {
             type: DataTypes.INTEGER,
             references: {
-                model: PerguntasCategorias,
-                key: 'perguntacategoriaid'
+                model: DimensoesCategorias,
+                key: 'dimensaocategoriaid'
             }
         },
         descricao: DataTypes.STRING,
