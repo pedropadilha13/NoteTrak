@@ -8,5 +8,6 @@ const Projetos = require(path.join(...basePathControllers, 'Projetos.js'));
 
 // TODO: alterar para manter as rotas dinamicas e bem organizadas (usar routes/view como exemplo)
 router.get('/projetos/pesquisar', Projetos.listar);
+router.get('/projetos/pesquisar/:id', Projetos.pesquisar);
 
 module.exports = router;

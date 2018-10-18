@@ -1,7 +1,7 @@
 const path = require('path');
 const Database = require('../Database');
 
-const basePathModels = [ __dirname, '..', 'models' ];
+const basePathModels = [__dirname, '..', 'models'];
 const sequelize = Database.getInstance();
 const Projetos = sequelize.import(path.join(...basePathModels, 'Projetos.js'));
 
@@ -49,5 +49,25 @@ module.exports = {
                     }
                 });
             });
+    },
+    pesquisar: function (req, res, next) {
+        let id = req.params.id;
+        console.log('Pesquisar id', id);
+        Projetos.findById(id).then(result => {
+            return res.json({
+                code: 1,
+                body: {
+                    projeto: result
+                }
+            });
+        }).catch(error => {
+            return res.json({
+                code: 0,
+                body: {
+                    error
+                }
+            });
+        });
     }
+
 };
