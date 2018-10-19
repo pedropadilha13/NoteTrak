@@ -48,10 +48,8 @@ module.exports = {
             });
         });
     },
-    adicionar: function(req, res, next) {
-        Pojetos.create({
-            values: req.body
-        }).then(result => {
+    adicionar: function (req, res, next) {
+        Projetos.create(req.body).then(result => {
             return res.json({
                 code: 1,
                 body: result
@@ -63,18 +61,18 @@ module.exports = {
             });
         });
     },
-    atualizar: function(req, res, next) {
-        Projetos.update({
-            values: req.body,
-            options: {
-                where: {id: req.body.id}
-            }
+    atualizar: function (req, res, next) {
+        console.log('ENTROU NO ATUALIZAR');
+        Projetos.update(req.body, {
+            where: { projetoid: req.body.projetoid }
         }).then(result => {
+            console.log('ENTROU NO THEN');
             return res.json({
                 code: 1,
                 body: result
             });
         }).catch(error => {
+            console.log('ENTROU NO CATCH');
             return res.json({
                 code: 0,
                 body: error
@@ -83,11 +81,8 @@ module.exports = {
     },
     pesquisarInativos: function (req, res, next) {
         Projetos.findAll({
-            include: {
-                model: StatusProjetos,
-                where: {
-                    ativo: 0
-                }
+            where: {
+                statusprojetoid: 4
             }
         }).then(results => {
             return res.json({
