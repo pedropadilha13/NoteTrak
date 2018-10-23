@@ -3,7 +3,7 @@
 
     function Projeto(attributes = {}) {
         var attr = Object(attributes);
-        this.id = attr.id | 0;
+        this.projetoid = attr.projetoid | 0;
         this.nome = attr.nome || '';
         this.empresa = attr.empresa || '';
         this.contato = attr.contato || '';
@@ -12,8 +12,16 @@
         this.progresso = (attr.progresso | 0) % 101;
     };
 
-    Projeto.prototype.pesquisar = function pesquisar(filtros = {}) {
-        return new Ajax('/api/projetos/pesquisar', filtros);
+    Projeto.prototype.fillPageByClass = function fillPageByClass($context = document) {
+        for (var prop in this) {
+            var value = this[prop];
+            if (isString(value) || isNumber(value)) {
+                var $elements = $context.querySelectorAll('.' + prop);
+                for (var i = 0; i < $elements.length; i++) {
+                    $elements[i].textContent = value;
+                }
+            }
+        }
     };
 
     Projeto.prototype.getBox = function getBox() {
@@ -31,10 +39,18 @@
         $divBoxProjetos.appendChild($pTitleProjeto);
         $divBoxProjetos.appendChild($progressBar);
         $divBoxProjetos.onclick = function () {
-            window.location.assign('/projetos/' + this.id);
+            window.location.assign('/projetos/' + this.projetoid);
         }.bind(this);
         return $divBoxProjetos;
-    }
+    };
+
+    Projeto.prototype.pesquisar = function pesquisar(filtros = {}) {
+        return new Ajax('/api/projetos/pesquisar', filtros);
+    };
+
+    Projeto.prototype.visualizar = function visualizar() {
+        return new Ajax('/api/projetos/pesquisar/' + this.projetoid);
+    };
 
     window.NoteTrakModules.Projeto = Projeto;
 })(window, document);

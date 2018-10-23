@@ -87,6 +87,10 @@
         return $element;
     }
 
+    function getIdFromUrl() {
+        return window.location.pathname.replace(/.*?(\d+$)/, function (s, c) { return c; }) | 0;
+    }
+
     function getProgressBar(progress = 0, status = 1) {
         var $progress = document.createElement('progress');
         var color = status === 0 ? 'is-danger' : progress === 100 ? 'is-success' : 'is-warning';
@@ -100,6 +104,14 @@
 
     function isFunction(param) {
         return Object.prototype.toString.call(param) === '[object Function]';
+    }
+
+    function isNumber(param) {
+        return Object.prototype.toString.call(param) === '[object Number]';
+    }
+
+    function isString(param) {
+        return Object.prototype.toString.call(param) === '[object String]';
     }
 
     function setSpinner($element) {
@@ -151,7 +163,10 @@
 
     window.Ajax = Ajax;
     window.getProgressBar = getProgressBar;
+    window.getIdFromUrl = getIdFromUrl;
     window.isFunction = isFunction;
+    window.isNumber = isNumber;
+    window.isString = isString;
     window.setSpinner = setSpinner;
     window.NoteTrakModules = {};
 })(window, document);
