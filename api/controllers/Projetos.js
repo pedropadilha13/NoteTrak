@@ -4,7 +4,6 @@ const Database = require('../Database');
 const basePathModels = [__dirname, '..', 'models'];
 const sequelize = Database.getInstance();
 const Projetos = sequelize.import(path.join(...basePathModels, 'Projetos.js'));
-const StatusProjetos = sequelize.import(path.join(...basePathModels, 'StatusProjetos.js'));
 
 module.exports = {
     listar: function (req, res, next) {
@@ -62,17 +61,14 @@ module.exports = {
         });
     },
     atualizar: function (req, res, next) {
-        console.log('ENTROU NO ATUALIZAR');
         Projetos.update(req.body, {
             where: { projetoid: req.body.projetoid }
         }).then(result => {
-            console.log('ENTROU NO THEN');
             return res.json({
                 code: 1,
                 body: result
             });
         }).catch(error => {
-            console.log('ENTROU NO CATCH');
             return res.json({
                 code: 0,
                 body: error
