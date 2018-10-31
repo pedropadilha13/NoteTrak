@@ -52,7 +52,7 @@ module.exports = {
             }
         }).then(result => {
             return res.json({
-                code: 0,
+                code: 1,
                 body: result
             });
         }).catch(error => {

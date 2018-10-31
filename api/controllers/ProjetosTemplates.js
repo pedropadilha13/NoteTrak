@@ -6,5 +6,68 @@ const sequelize = Database.getInstance();
 const ProjetosTemplates = sequelize.import(path.join(...basePathModels, 'ProjetosTemplates.js'));
 
 module.exports = {
-
+    listar: function (req, res, next) {
+        nome.findAll().then(result => {
+            return res.json({
+                code: 1,
+                body: {
+                    projetosTemplates: result
+                }
+            });
+        }).catch(error => {
+            return res.json({
+                code: 0,
+                body: {
+                    error
+                }
+            });
+        });
+    },
+    pesquisar: function (req, res, next) {
+        nome.findById(req.params.id).then(result => {
+            return res.json({
+                code: 1,
+                body: {
+                    projetoTemplate: result
+                }
+            });
+        }).catch(error => {
+            return res.json({
+                code: 0,
+                body: {
+                    error
+                }
+            });
+        });
+    },
+    adicionar: function (req, res, next) {
+        nome.create(req.body).then(result => {
+            return res.json({
+                code: 1,
+                body: result
+            });
+        }).catch(error => {
+            return res.json({
+                code: 0,
+                body: error
+            });
+        });
+    },
+    atualizar: function (req, res, next) {
+        nome.update(req.body, {
+            where: {
+                templateid: req.body.templateid
+            }
+        }).then(result => {
+            return res.json({
+                code: 1,
+                body: result
+            });
+        }).catch(error => {
+            return res.json({
+                code: 0,
+                body: error
+            });
+        });
+    }
 };
