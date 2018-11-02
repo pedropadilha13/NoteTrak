@@ -2,8 +2,10 @@
     'use strict';
 
     var Projeto = window.NoteTrakModules.Projeto;
+    var Pergunta = window.NoteTrakModules.Pergunta;
 
     var projeto = new Projeto({ projetoid: getIdFromUrl() });
+    var perguntas = new Pergunta();
 
     // TODO: criar funcoes genericas de pre-envio de formularios e conclusao de requisicoes
     var $formPesquisarProjetos = document.querySelector('form[data-id="pesquisarProjetos"]');
@@ -31,11 +33,34 @@
     }
 
     if ($graficoProjetos) {
+        bindTabs();
         projeto.visualizar().then(function (result) {
-            var projeto = new Projeto(result.body.projeto || {});
-            var chartProjetos = initializeChart($graficoProjetos, ['Ativos e Devices', 'Comunicação e Conectividade', 'Serviços de Backend', 'Padrões & Requerimentos regulatórios', 'Ambiente de Projeto'], [2.48, 2, 3.25, 1.92, 2.25]);
-            projeto.fillPageByClass();
+            var projeto = fillTabGeral(result.body.projeto);
+            (new Pergunta()).pesquisar().then(function (result) {
+                fillTabPerguntas(result.body.perguntas);
+            });
         });
+    }
+
+    function fillTabGeral(projeto) {
+        var projeto = new Projeto(projeto || {});
+        var chartProjetos = initializeChart($graficoProjetos, ['Ativos e Devices', 'Comunicação e Conectividade', 'Serviços de Backend', 'Padrões & Requerimentos regulatórios', 'Ambiente de Projeto'], [2.48, 2, 3.25, 1.92, 2.25]);
+        projeto.fillPageByClass();
+    }
+
+    function fillTabPerguntas(perguntas) {
+        var $documentFragment = document.createDocumentFragment();
+        if (Array.isArray(perguntas)) {
+            perguntas.forEach(function (pergunta) {
+                var $p = document.createElement('p');
+                $p.textContent = pergunta.descricao || '';
+                $documentFragment.appendChild($p);
+            });
+            var $div = document.querySelector('[data-id="perguntas"]');
+            if ($div) {
+                $div.appendChild($documentFragment);
+            }
+        }
     }
 
     function initializeChart(context, labels, data) {
@@ -59,5 +84,29 @@
                 }
             }
         });
+    }
+
+    function bindTabs() {
+        var $tabs = document.querySelectorAll('[data-tab-target]');
+        $tabs.forEach(function ($tab) {
+            $tab.addEventListener('click', function (event) {
+                $tabs.forEach(function ($tab) {
+                    if ($tab !== event.currentTarget) {
+                        $tab.classList.remove('is-active');
+                        toggleCurrentTab($tab, 'none');
+                    } else {
+                        $tab.classList.add('is-active')
+                        toggleCurrentTab($tab, 'block');
+                    }
+                });
+            });
+        });
+    }
+
+    function toggleCurrentTab($tab, display) {
+        var $tabContent = document.querySelector($tab.getAttribute('data-tab-target') || '');
+        if ($tabContent) {
+            $tabContent.style.display = display;
+        }
     }
 })(window, document);

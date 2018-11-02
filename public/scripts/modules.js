@@ -1,4 +1,4 @@
-(function (window, document) {
+window.NoteTrakModules.Projeto = (function (window, document) {
     'use strict';
 
     function Projeto(attributes = {}) {
@@ -52,5 +52,17 @@
         return new Ajax('/api/projetos/pesquisar/' + this.projetoid);
     };
 
-    window.NoteTrakModules.Projeto = Projeto;
+    return Projeto;
+})(window, document);
+
+window.NoteTrakModules.Pergunta = (function (window, document) {
+    'use strict';
+
+    function Pergunta() {}
+
+    Pergunta.prototype.pesquisar = function pesquisar() {
+        return new Ajax('/api/perguntas/pesquisar');
+    }
+
+    return Pergunta;
 })(window, document);
