@@ -81,6 +81,5 @@ router.post('/statusprojetos/atualizar', StatusProjetos.atualizar);
 
 // /teste
 router.get('/teste/join/:id', Testes.testeJoin);
-router.get('/teste/pp/:id', Testes.pesquisar);
 
 module.exports = router;
