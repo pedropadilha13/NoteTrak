@@ -16,7 +16,7 @@
                         <div class="column">
                             <p><b>Nome do Projeto:</b> <span class="nome"></span></p>
                             <p><b>Contato Principal:</b> <span class="contato"></span></p>
-                            <p><b>Status do Projeto:</b> <span class="status">{status}</span></p>
+                            <p><b>Status do Projeto:</b> <span class="status"></span></p>
                         </div>
                     </div>
                     <div class="columns">
@@ -59,7 +59,7 @@
                         </div>
                         <div class="column">
                             <div class="box has-text-centered">
-                                <h3 class="subtitle">Track & Trace</h3>
+                                <h3 class="subtitle nome"></h3>
                                 <canvas data-id="graficoProjetos"></canvas>
                             </div>
                         </div>
@@ -70,19 +70,85 @@
                                 <h3 class="subtitle">Dimensões do Projeto</h3>
                                 <div class="columns">
                                     <div class="column listDimensoesCategorias">
-                                        <hr style="margin: 0;">
-                                        <p>
-                                            <span>Ativos e Devices</span>
-                                            <span>2,48</span>
-                                        </p>
-                                        <div style="padding: 0 15px; border-bottom: 1px solid #ccc;">
-                                            <span>elemento1</span>
+                                        <div class="listTemplate">
+                                            <p class="titleTemplate">
+                                                <span><i class="fas fa-angle-down"></i> Ativos e Devices</span>
+                                                <span>2,48</span>
+                                            </p>
+                                            <div>
+                                                <b>
+                                                    <span><i class="fas fa-angle-right"></i> Geral</span>
+                                                    <span>2,48</span>
+                                                </b>
+                                                <hr class="no-margin">
+                                                <div class="collapse" style="display: flex; justify-content: space-between">
+                                                    <span style="width: 35%;">Número de Ativos</span>
+                                                    <input class="input is-small" type="number" min="0" max="4" value="0" style="text-align: right; width: 20%;" />
+                                                    <span style="width: 45%;">100s</span>
+                                                    <i class="fas fa-comments"></i>
+                                                </div>
+                                                <hr class="no-margin">
+                                            </div>
+                                            <div>
+                                                <b>
+                                                    <span><i class="fas fa-angle-down"></i> Poder de Processamento</span>
+                                                    <span>2,48</span>
+                                                </b>
+                                                <hr class="no-margin">
+                                                <div style="display: flex; justify-content: space-between">
+                                                    <span style="width: 35%;">Lógica de Negócio Local</span>
+                                                    <input class="input is-small" type="number" min="0" max="4" value="0" style="text-align: right; width: 20%;" />
+                                                    <span style="width: 45%;">Lógica básica de armazenamento e encaminhamento para tratar a Indisponibilidade temporária da Rede</span>
+                                                    <i class="fas fa-comments"></i>
+                                                </div>
+                                                <hr class="no-margin">
+                                                <div style="display: flex; justify-content: space-between">
+                                                    <span style="width: 35%;">Lógica de Negócio Local</span>
+                                                    <input class="input is-small" type="number" min="0" max="4" value="0" style="text-align: right; width: 20%;" />
+                                                    <span style="width: 45%;">Lógica básica de armazenamento e encaminhamento para tratar a Indisponibilidade temporária da Rede</span>
+                                                    <i class="fas fa-comments"></i>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div style="padding: 0 45px;">
-                                            <span>elemento1.1</span>
-                                        </div>
-                                        <div style="padding: 0 45px; border-bottom: 1px solid #ccc;">
-                                            <span>elemento1.3</span>
+                                        <div class="listTemplate">
+                                            <p class="titleTemplate">
+                                                <span><i class="fas fa-angle-right"></i> Ativos e Devices</span>
+                                                <span>2,48</span>
+                                            </p>
+                                            <div class="collapse">
+                                                <b>
+                                                    <span><i class="fas fa-angle-down"></i> Geral</span>
+                                                    <span>2,48</span>
+                                                </b>
+                                                <hr class="no-margin">
+                                                <div style="display: flex; justify-content: space-between">
+                                                    <span style="width: 35%;">Número de Ativos</span>
+                                                    <input class="input is-small" type="number" min="0" max="4" value="0" style="text-align: right; width: 20%;" />
+                                                    <span style="width: 45%;">100s</span>
+                                                    <i class="fas fa-comments"></i>
+                                                </div>
+                                                <hr class="no-margin">
+                                            </div>
+                                            <div class="collapse">
+                                                <b>
+                                                    <span><i class="fas fa-angle-down"></i> Poder de Processamento</span>
+                                                    <span>2,48</span>
+                                                </b>
+                                                <hr class="no-margin">
+                                                <div style="display: flex; justify-content: space-between">
+                                                    <span style="width: 35%;">Lógica de Negócio Local</span>
+                                                    <input class="input is-small" type="number" min="0" max="4" value="0" style="text-align: right; width: 20%;" />
+                                                    <span style="width: 45%;">Lógica básica de armazenamento e encaminhamento para tratar a Indisponibilidade temporária da Rede</span>
+                                                    <i class="fas fa-comments"></i>
+                                                </div>
+                                                <hr class="no-margin">
+                                                <div style="display: flex; justify-content: space-between">
+                                                    <span style="width: 35%;">Lógica de Negócio Local</span>
+                                                    <input class="input is-small" type="number" min="0" max="4" value="0" style="text-align: right; width: 20%;" />
+                                                    <span style="width: 45%;">Lógica básica de armazenamento e encaminhamento para tratar a Indisponibilidade temporária da Rede</span>
+                                                    <i class="fas fa-comments"></i>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -90,10 +156,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="box" data-tab-id="tabPerguntas">
+                <div class="box" data-tab-id="tabPerguntas" style="display: none;">
                     <div data-id="perguntas"></div>
                 </div>
-                <div class="box" data-tab-id="tabAvancado">
+                <div class="box" data-tab-id="tabAvancado" style="display: none;">
                     Hello, World 2!
                 </div>
             </div>
