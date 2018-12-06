@@ -3,6 +3,7 @@ var router = express.Router();
 
 var projetos = require('./projetos');
 var perguntas = require('./perguntas');
+var dimensoes = require('./dimensoes');
 
 router.get('/', function (req, res, next) {
     res.render('index', {
@@ -14,5 +15,6 @@ router.get('/', function (req, res, next) {
 
 router.use('/projetos', projetos);
 router.use('/perguntas', perguntas);
+router.use('/dimensoes', dimensoes);
 
 module.exports = router;

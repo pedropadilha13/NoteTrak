@@ -123,3 +123,72 @@ window.NoteTrakModules.Pergunta = (function (window, document) {
 
     return Pergunta;
 })(window, document);
+
+window.NoteTrakModules.Dimensao = (function (window, document) {
+    'use strict';
+
+    function Dimensao() {}
+
+    Dimensao.prototype.editar = function editar() {
+        return new Ajax('/api/dimensoes/pesquisar');
+    }
+
+    Dimensao.prototype.pesquisar = function pesquisar() {
+        return new Ajax('/api/dimensoes/pesquisar');
+    }
+
+    Dimensao.prototype.getBox = function getBox(descricao) {
+        var dimensaoid = descricao.dimensaoid | 0;
+        var $element = document.createElement('div');
+        var $box = document.createElement('div');
+        var $section1 = document.createElement('div');
+        var $section2 = document.createElement('div');
+        var $p = document.createElement('p');
+        var $a = document.createElement('a');
+        var $icon = document.createElement('i');
+        $element.classList.add('box');
+        $box.classList.add('columns');
+        $section1.classList.add('column', 'is-11');
+        $section2.classList.add('column', 'is-1');
+        $a.classList.add('button', 'is-primary');
+        $icon.classList.add('fas', 'fa-pencil-alt');
+        $p.innerText = descricao.descricao || '';
+        $a.onclick = function () {
+            var msg = $p.innerText;
+            var $input = document.createElement('input');
+            var $icon = document.createElement('i');
+            var $saveButton = document.createElement('a');
+            $icon.classList.add('fas', 'fa-save');
+            $saveButton.classList.add('button', 'is-info');
+            $saveButton.appendChild($icon);
+            $saveButton.onclick = function () {
+                var newMsg = $input.value;
+                $saveButton.classList.add('is-loading');
+                this.editar().then(response => {
+                    var code = response.code | 0;
+                    if (code === 1) {
+                        $p.innerText = newMsg;
+                        $section1.empty().appendChild($p);
+                        $section2.empty().appendChild($a);
+                    }
+                }).always(function () {
+                    $saveButton.classList.remove('is-loading');
+                });
+            }.bind(this);
+            $input.classList.add('input');
+            $input.setAttribute('type', 'text');
+            $input.value = msg;
+            $section1.empty().appendChild($input);
+            $section2.empty().appendChild($saveButton);
+        }.bind(this);
+        $a.appendChild($icon);
+        $section1.appendChild($p);
+        $section2.appendChild($a);
+        $box.appendChild($section1);
+        $box.appendChild($section2);
+        $element.appendChild($box);
+        return $element;
+    }
+
+    return Dimensao;
+})(window, document);
