@@ -3,9 +3,11 @@
 
     var Projeto = window.NoteTrakModules.Projeto;
     var Pergunta = window.NoteTrakModules.Pergunta;
+    var Dimensao = window.NoteTrakModules.Dimensao;
 
     var projeto = new Projeto({ projetoid: getIdFromUrl() });
     var perguntas = new Pergunta();
+    var dimensao = new Dimensao();
 
     // TODO: criar funcoes genericas de pre-envio de formularios e conclusao de requisicoes
     var $formPesquisarProjetos = document.querySelector('form[data-id="pesquisarProjetos"]');
@@ -34,11 +36,50 @@
 
     if ($graficoProjetos) {
         bindTabs();
+        fillTabDimensoes();
         projeto.visualizar().then(function (result) {
             fillTabGeral((result.body || {}).projeto);
             perguntas.pesquisar().then(function (result) {
                 fillTabPerguntas(result.body.perguntas);
             });
+        });
+    }
+
+    function fillTabDimensoes() {
+        var $listaDimensoes = document.querySelector('[data-id="listaDimensoes"]');
+        setSpinner($listaDimensoes);
+        dimensao.pesquisar().then(function (response) {
+            var code = response.code | 0;
+            if (code === 1) {
+                var dimensoes = response.dimensoes || [];
+                var $element = document.createDocumentFragment();
+                dimensoes.forEach(function (dimensao) {
+                    var $div = document.createElement('div');
+                    var $span1 = document.createElement('span');
+                    var $span2 = document.createElement('input');
+                    var $span3 = document.createElement('span');
+                    $div.style.display = 'flex';
+                    $div.style.justifyContent = 'space-between';
+                    $span1.style.width = '35%';
+                    $span1.innerText = dimensao.descricao || '';
+                    $span2.style.width = '20%';
+                    $span2.style.textAlign = 'right';
+                    $span2.value = 0;
+                    $span2.min = 0;
+                    $span2.max = 4;
+                    $span2.setAttribute('type', 'number');
+                    $span2.classList.add('input', 'is-small');
+                    $span3.style.width = '45%';
+                    $span3.innerText = dimensao.descricao || '';
+                    $div.appendChild($span1);
+                    $div.appendChild($span2);
+                    $div.appendChild($span3);
+                    $element.appendChild($div);
+                });
+                $listaDimensoes.empty().appendChild($element);
+            }
+        }).error(function () {
+            $listaDimensoes.empty();
         });
     }
 
