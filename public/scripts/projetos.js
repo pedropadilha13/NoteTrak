@@ -35,8 +35,8 @@
     if ($graficoProjetos) {
         bindTabs();
         projeto.visualizar().then(function (result) {
-            fillTabGeral(result.body.projeto);
-            (new Pergunta()).pesquisar().then(function (result) {
+            fillTabGeral((result.body || {}).projeto);
+            perguntas.pesquisar().then(function (result) {
                 fillTabPerguntas(result.body.perguntas);
             });
         });
@@ -70,7 +70,7 @@
                 labels,
                 datasets: [{
                     backgroundColor: 'rgba(71, 187, 270, 0.25)',
-                    chartData
+                    data: chartData
                 }]
             },
             options: {

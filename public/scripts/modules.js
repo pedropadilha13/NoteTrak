@@ -94,7 +94,6 @@ window.NoteTrakModules.Pergunta = (function (window, document) {
             $saveButton.appendChild($icon);
             $saveButton.onclick = function () {
                 var newMsg = $input.value;
-                $input.classList.add('is-loading');
                 $saveButton.classList.add('is-loading');
                 this.editar().then(response => {
                     var code = response.code | 0;
@@ -105,7 +104,6 @@ window.NoteTrakModules.Pergunta = (function (window, document) {
                     }
                 }).always(function () {
                     $saveButton.classList.remove('is-loading');
-                    $input.classList.remove('is-loading');
                 });
             }.bind(this);
             $input.classList.add('input');
