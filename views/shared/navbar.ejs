@@ -1,6 +1,6 @@
 <nav class="navbar is-light" role="navigation">
     <div class="navbar-brand">
-        <p class="navbar-item">NoteTrak</p>
+        <p class="navbar-item"><b>NoteTrak</b></p>
         <a class="navbar-burguer" role="button" aria-expanded="false" aria-label="menu">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -14,7 +14,7 @@
             <div class="navbar-item has-dropdown">
                 <a class="navbar-link">Configurações</a>
                 <div class="navbar-dropdown is-right">
-                    <a class="navbar-item <%= locals.tab === 2 ? 'is-active' : '' %>">
+                    <a class="navbar-item <%= locals.tab === 2 ? 'is-active' : '' %>" href="/perguntas">
                         Formulário de Perguntas
                     </a>
                     <a class="navbar-item <%= locals.tab === 3 ? 'is-active' : '' %>">

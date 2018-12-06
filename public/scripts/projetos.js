@@ -35,7 +35,7 @@
     if ($graficoProjetos) {
         bindTabs();
         projeto.visualizar().then(function (result) {
-            var projeto = fillTabGeral(result.body.projeto);
+            fillTabGeral(result.body.projeto);
             (new Pergunta()).pesquisar().then(function (result) {
                 fillTabPerguntas(result.body.perguntas);
             });
@@ -44,7 +44,7 @@
 
     function fillTabGeral(projeto) {
         var projeto = new Projeto(projeto || {});
-        var chartProjetos = initializeChart($graficoProjetos, ['Ativos e Devices', 'Comunicação e Conectividade', 'Serviços de Backend', 'Padrões & Requerimentos regulatórios', 'Ambiente de Projeto'], [2.48, 2, 3.25, 1.92, 2.25]);
+        initializeChart($graficoProjetos, ['Ativos e Devices', 'Comunicação e Conectividade', 'Serviços de Backend', 'Padrões & Requerimentos regulatórios', 'Ambiente de Projeto'], [2.48, 2, 3.25, 1.92, 2.25]);
         projeto.fillPageByClass();
     }
 
@@ -63,14 +63,14 @@
         }
     }
 
-    function initializeChart(context, labels, data) {
+    function initializeChart(context, labels, chartData) {
         return new Chart(context, {
             type: 'radar',
             data: {
                 labels,
                 datasets: [{
                     backgroundColor: 'rgba(71, 187, 270, 0.25)',
-                    data
+                    chartData
                 }]
             },
             options: {
