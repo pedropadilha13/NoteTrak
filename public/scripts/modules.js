@@ -9,6 +9,7 @@ window.NoteTrakModules.Projeto = (function (window, document) {
         this.contato = attr.contato || '';
         this.status = attr.status || '';
         this.statusId = attr.statusId == null ? -1 : attr.statusId;
+        this.statusDescricao = attr.descricao || '';
         this.progresso = (attr.progresso | 0) % 101;
     };
 
