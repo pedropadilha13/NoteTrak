@@ -91,7 +91,7 @@
         return window.location.pathname.replace(/.*?(\d+$)/, function (s, c) { return c; }) | 0;
     }
 
-    function getProgressBar(progress = 0, status = 1) {
+    function getProgressBar(progress = 33, status = 1) {
         var $progress = document.createElement('progress');
         var color = status === 0 ? 'is-danger' : progress === 100 ? 'is-success' : 'is-warning';
         $progress.max = 100;

@@ -7,3 +7,24 @@
 .no-margin {
   margin: 0 !important;
 }
+
+.categoriaTitle {
+  padding-bottom: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #000;
+}
+
+.subcategoriaTitle {
+  padding-bottom: 5px;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.divSubcategoria {
+  padding-bottom: 20px;
+}
+
+.divSubcategoria:last-child {
+  padding-bottom: 30px;
+}

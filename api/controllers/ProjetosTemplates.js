@@ -7,7 +7,7 @@ const ProjetosTemplates = sequelize.import(path.join(...basePathModels, 'Projeto
 
 module.exports = {
     listar: function (req, res, next) {
-        nome.findAll().then(result => {
+        ProjetosTemplates.findAll().then(result => {
             return res.json({
                 code: 1,
                 body: {
@@ -24,7 +24,7 @@ module.exports = {
         });
     },
     pesquisar: function (req, res, next) {
-        nome.findById(req.params.id).then(result => {
+        ProjetosTemplates.findById(req.params.id).then(result => {
             return res.json({
                 code: 1,
                 body: {
@@ -41,7 +41,7 @@ module.exports = {
         });
     },
     adicionar: function (req, res, next) {
-        nome.create(req.body).then(result => {
+        ProjetosTemplates.create(req.body).then(result => {
             return res.json({
                 code: 1,
                 body: result
@@ -54,7 +54,7 @@ module.exports = {
         });
     },
     atualizar: function (req, res, next) {
-        nome.update(req.body, {
+        ProjetosTemplates.update(req.body, {
             where: {
                 templateid: req.body.templateid
             }

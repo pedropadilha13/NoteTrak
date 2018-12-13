@@ -29,7 +29,7 @@ window.NoteTrakModules.Projeto = (function (window, document) {
         var $pTitleProjeto = document.createElement('p');
         var $spanNomeProjeto = document.createElement('span');
         var $spanStatusProjeto = document.createElement('span');
-        var $progressBar = getProgressBar(this.progresso, this.statusId);
+        var $progressBar = getProgressBar(33, this.statusId);
         $divBoxProjetos.classList.add('boxProjetos');
         $pTitleProjeto.classList.add('titleProjeto');
         $spanNomeProjeto.innerText = (`${this.nome} ${this.contato ? `(${this.contato + (this.empresa ? (', ' + this.empresa) : '')})` : this.empresa ? `(${this.empresa})` : ''}`);
@@ -189,6 +189,40 @@ window.NoteTrakModules.Dimensao = (function (window, document) {
         $element.appendChild($box);
         return $element;
     }
+
+    Dimensao.prototype.mixObject = function mixObject(listaCategorias, listaSubcategorias, listaDimensoes) {
+        var final = {};
+        listaDimensoes.forEach(function (dimensao) {
+            var subCategoria = (function () {
+                for (var subcategoria of listaSubcategorias) {
+                    if (dimensao.dimensaosubcategoriaid == subcategoria.dimensaosubcategoriaid) {
+                        return subcategoria;
+                    }
+                }
+                return {};
+            })();
+            var categoria = (function () {
+                for (var cat of listaCategorias) {
+                    if (cat.dimensaocategoriaid == subCategoria.dimensaocategoriaid) {
+                        return cat;
+                    }
+                }
+                return {};
+            })();
+            if (final[categoria.dimensaocategoriaid]) {
+                var innerCategoria = final[categoria.dimensaocategoriaid];
+                innerCategoria.subCategorias = innerCategoria.subCategorias || {};
+                if (!innerCategoria.subCategorias[subCategoria.dimensaosubcategoriaid]) {
+                    innerCategoria.subCategorias[subCategoria.dimensaosubcategoriaid] = subCategoria;
+                }
+                innerCategoria.subCategorias[subCategoria.dimensaosubcategoriaid].dimensoes = innerCategoria.subCategorias[subCategoria.dimensaosubcategoriaid].dimensoes || [];
+                innerCategoria.subCategorias[subCategoria.dimensaosubcategoriaid].dimensoes.push(dimensao);
+            } else {
+                final[categoria.dimensaocategoriaid] = categoria;
+            }
+        });
+        return final;
+    };
 
     return Dimensao;
 })(window, document);
